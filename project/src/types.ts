@@ -11,9 +11,11 @@ export interface AnalysisResult {
   complimentCount: number;
   emojiCount: number;
   greetingCount: number;
+  cussCount: number;
   
   // Message Examples
   complimentMessages: Array<Message>;
   emojiMessages: Array<Message>;
   greetingMessages: Array<Message>;
+  cussMessages: Array<Message>;
 }

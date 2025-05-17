@@ -6,7 +6,8 @@ const nepaliPhrases = {
   emotions: {
     positive: ['maja', 'ramro', 'khusi', 'love', 'haha', 'lol'],
     negative: ['naramro', 'dukha', 'rish', 'angry', 'sad'],
-  }
+  },
+  cussWords: ['muji', 'randi', 'machikne', 'lado', 'puti']
 };
 
 function analyzeWords(content: string) {
@@ -37,6 +38,7 @@ export async function analyzeChat(text: string): Promise<AnalysisResult> {
   let totalEmojiCount = 0;
   let complimentCount = 0;
   let greetingCount = 0;
+  let cussCount = 0;
 
   messages.forEach(msg => {
     // Count messages per person
@@ -57,6 +59,12 @@ export async function analyzeChat(text: string): Promise<AnalysisResult> {
       msg.content.toLowerCase().includes(greeting))) {
       greetingCount++;
     }
+
+    // Count cuss words
+    if (nepaliPhrases.cussWords.some(cuss => 
+      msg.content.toLowerCase().includes(cuss))) {
+      cussCount++;
+    }
   });
 
   // Filter messages for details
@@ -74,13 +82,20 @@ export async function analyzeChat(text: string): Promise<AnalysisResult> {
       msg.content.toLowerCase().includes(greeting))
   );
 
+  const cussMessages = messages.filter(msg => 
+    nepaliPhrases.cussWords.some(cuss => 
+      msg.content.toLowerCase().includes(cuss))
+  );
+
   return {
     messageCounts,
     complimentCount,
     emojiCount: totalEmojiCount,
     greetingCount,
+    cussCount,
     complimentMessages,
     emojiMessages,
-    greetingMessages
+    greetingMessages,
+    cussMessages
   };
 }

@@ -74,9 +74,11 @@ function App() {
                   complimentCount={result.complimentCount}
                   emojiCount={result.emojiCount}
                   greetingCount={result.greetingCount}
+                  cussCount={result.cussCount}
                   complimentMessages={result.complimentMessages}
                   emojiMessages={result.emojiMessages}
                   greetingMessages={result.greetingMessages}
+                  cussMessages={result.cussMessages}
                 />
 
                 <button

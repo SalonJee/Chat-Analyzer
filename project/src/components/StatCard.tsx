@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageCircle, Heart, Smile, MessageSquare, ChevronLeft } from 'lucide-react';
+import { MessageCircle, Heart, Smile, MessageSquare, ChevronLeft, AlertTriangle } from 'lucide-react';
 import { Message } from '../types';
 
 // Add this CSS to your global stylesheet or as a component style
@@ -106,22 +106,26 @@ const StatCards: React.FC<{
   complimentCount: number;
   emojiCount: number;
   greetingCount: number;
+  cussCount: number;
   complimentMessages: Message[];
   emojiMessages: Message[];
   greetingMessages: Message[];
+  cussMessages: Message[];
 }> = ({
   messageCounts,
   complimentCount,
   emojiCount,
   greetingCount,
+  cussCount,
   complimentMessages,
   emojiMessages,
-  greetingMessages
+  greetingMessages,
+  cussMessages
 }) => {
   const totalMessages = Object.values(messageCounts).reduce((a, b) => a + b, 0);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
       <StatCard 
         icon={<MessageCircle className="h-6 w-6 text-blue-500" />} 
         title="Total Messages"
@@ -151,6 +155,14 @@ const StatCards: React.FC<{
         value={greetingCount}
         subtitle="hello & goodbye"
         messages={greetingMessages}
+      />
+
+      <StatCard 
+        icon={<AlertTriangle className="h-6 w-6 text-purple-500" />} 
+        title="Gali Galoch"
+        value={cussCount}
+        subtitle="inappropriate language"
+        messages={cussMessages}
       />
     </div>
   );
